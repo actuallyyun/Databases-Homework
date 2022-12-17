@@ -31,7 +31,25 @@ When you have finished all of the questions - open a pull request with your answ
 9. We now want to store who among the students attends a specific class. How would you store that? Come up with a solution and insert some data if you model this as a new table.
 10. Answer the following questions using a `select` SQL statement:
     - Retrieve all the mentors who lived more than 5 years in Glasgow
+
+    SELECT * FROM mentors where years_glasgow>5;
+
     - Retrieve all the mentors whose favourite language is Javascript
+
+    SELECT * FROM mentors where favorite_programming_lan=Javascript;
+
     - Retrieve all the students who are CYF graduates
+    SELECT * FROM students WHERE is_graduated=true
+
+
     - Retrieve all the classes taught before June this year
+    SELECT * FROM classes WHERE date<'2022-06-01'
+
     - Retrieve all the students (retrieving student ids only is fine) who attended the Javascript class (or any other class that you have in the `classes` table).
+
+
+SELECT students_id FROM students_in_class as sc
+JOIN classes as c
+on sc.class_id=c.id
+WHERE c.topic='Javascript';
+
