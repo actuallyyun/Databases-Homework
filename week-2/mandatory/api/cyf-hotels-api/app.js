@@ -4,9 +4,9 @@ import Pool from 'pg-pool'
 
 const app =express()
 
-
 app.use(bodyParser.json());
 app.use(express.json())
+
 
 const pool = new Pool({
     user: 'Ayun',
@@ -16,28 +16,29 @@ const pool = new Pool({
     port: '',
 });
 
+const isPositiveInteger=(input)=>{
+    return Number.isInteger(input)&&input>0
+}
 
-const getCustomerById=(req,res)=>{
+
+ const  getCustomerById=async (req,res)=>{
     const customerId=parseInt(req.params.customerId)
+    const isValid=isPositiveInteger(customerId)?(true):false
+    const statusCode=isValid?200:400
 
-    const isValid=Number.isInteger(customerId)&&customerId>0?(true):false
-    const statusCode=isValid?200:404
-
-    let responseBody
+    let data
     
-
     if(isValid){
         const customerQuery=`SELECT * FROM customers WHERE id=${customerId}`
-        
-        pool
+
+        data=await pool
         .query(customerQuery)
         .then(result=>result.rows)
-        .then(data=>res.status(statusCode).send(data))
-        .catch((e)=>console.log(e))
-        
-    }else{
-        res.status(statusCode).send()
+        .then(data=>{return data})
+        .catch((e)=>{return e})   
     }
+    
+    res.status(statusCode).send(data)
     
 }
 
@@ -50,6 +51,7 @@ INNER JOIN customers c
 ON b.customer_id=c.id
 WHERE c.id=${customerId}
 `
+
 }
 
 
