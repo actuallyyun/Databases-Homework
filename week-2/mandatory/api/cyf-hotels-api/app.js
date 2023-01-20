@@ -7,7 +7,6 @@ const app =express()
 app.use(bodyParser.json());
 app.use(express.json())
 
-
 const pool = new Pool({
     user: 'Ayun',
     host: 'localhost',
@@ -172,7 +171,6 @@ app.get("/customers",getCustomersByKeyword)
 app.get("/customers/:customerId",getCustomerById)
 
 app.get("/customers/:customerId/bookings",getCustomerBookings)
-
 
 app.post("/hotels", createNewHotel)
 
