@@ -9,6 +9,37 @@ Below you will find a set of tasks for you to complete to set up a databases of 
 To submit this homework write the correct commands for each question here:
 
 ```sql
+1. SELECT name,address FROM customers WHERE country='United States';
+2. SELECT * FROM customers ORDER by name ASC;
+3. SELECT * FROM products WHERE unit_price>100;
+4. SELECT * FROM products WHERE product_name LIKE '%socks%';
+5. SELECT * FROM products ORDER by unit_price DESC LIMIT 5;
+6. SELECT product_name, unit_price ,supplier_name FROM products as p
+JOIN suppliers as s ON p.supplier_id=s.id;
+7. SELECT product_name, supplier_name FROM products as p
+JOIN suppliers as s ON p.supplier_id=s.id
+WHERE s.country='United Kingdom';
+8.SELECT * FROM orders JOIN customers ON orders.customer_id=customers.id WHERE customer_id=1;
+9.SELECT * FROM orders JOIN customers ON orders.customer_id=customers.id WHERE customers.name='Hope Crosby';
+10. SELECT product_name, unit_price, quantity FROM orders as o
+JOIN order_items as oi ON o.id=oi.order_id
+JOIN products as p on oi.product_id=p.id
+WHERE o.order_reference='ORD006';
+11. SELECT name, order_reference, order_date, product_name, supplier_name, quantity
+    FROM customers as c
+    JOIN orders as o  ON c.id=o.customer_id
+    JOIN order_items  as oi ON o.id=oi.order_id
+    JOIN products as p ON oi.product_id=p.id
+    JOIN suppliers as s ON p.supplier_id=s.id
+    ORDER BY name ASC;
+
+12. SELECT name
+    FROM customers as c
+    JOIN orders as o  ON c.id=o.customer_id
+    JOIN order_items  as oi ON o.id=oi.order_id
+    JOIN products as p ON oi.product_id=p.id
+    JOIN suppliers as s ON p.supplier_id=s.id
+    WHERE s.country='China';
 
 
 ```
